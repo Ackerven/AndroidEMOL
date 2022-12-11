@@ -1,5 +1,6 @@
 package com.ackerven.adnroid.emol.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -10,10 +11,10 @@ import java.util.*
 @Dao
 interface MoonDao {
     @Query("SELECT * FROM `moon`")
-    fun getMoons(): List<Moon>
+    fun getMoons(): LiveData<List<Moon>>
 
     @Query("SELECT * FROM `moon` WHERE `id` = (:id)")
-    fun getMoon(id: UUID): Moon?
+    fun getMoon(id: UUID): LiveData<Moon?>
 
     @Update
     fun updateMoon(moon: Moon)

@@ -1,5 +1,6 @@
 package com.ackerven.adnroid.emol.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -10,10 +11,10 @@ import java.util.*
 @Dao
 interface DiaryDao {
     @Query("SELECT * FROM `diary`")
-    fun getDiarys(): List<Diary>
+    fun getDiarys(): LiveData<List<Diary>>
 
     @Query("SELECT * FROM `diary` WHERE `id` = (:id)")
-    fun getDiary(id: UUID): Diary?
+    fun getDiary(id: UUID): LiveData<Diary?>
 
     @Update
     fun updateDiary(diary: Diary)

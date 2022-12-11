@@ -1,6 +1,7 @@
 package com.ackerven.adnroid.emol.utils
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.room.Room
 import com.ackerven.adnroid.emol.database.EMOLDatabase
 import com.ackerven.adnroid.emol.model.Config
@@ -8,6 +9,7 @@ import com.ackerven.adnroid.emol.model.Diary
 import com.ackerven.adnroid.emol.model.Moon
 import java.lang.IllegalStateException
 import java.util.*
+import java.util.concurrent.Executors
 
 private const val DATABASE_NAME = "emol-database"
 
@@ -23,21 +25,55 @@ class EMOLRepository private constructor(context: Context) {
     private val moonDao = database.moonDao()
     private val configDao = database.configDao()
 
-    fun getDiarys(): List<Diary> = diaryDao.getDiarys()
-    fun getDiary(id: UUID) = diaryDao.getDiary(id)
-    fun updateDiary(diary: Diary) = diaryDao.updateDiary(diary)
-    fun insertDiary(diary: Diary) = diaryDao.insertDiary(diary)
-    fun deleteDiary(diary: Diary) = diaryDao.deleteDiary(diary.isDelete, diary.id)
+    private val executor = Executors.newSingleThreadExecutor()
 
-    fun getMoons(): List<Moon> = moonDao.getMoons()
-    fun getMoon(id: UUID) = moonDao.getMoon(id)
-    fun updateMoon(moon: Moon) = moonDao.updateMoon(moon)
-    fun deleteMoon(moon: Moon) = moonDao.deleteMoon(moon.isDelete, moon.id)
-    fun insertMoon(moon: Moon) = moonDao.insertMoon(moon)
+    fun getDiarys(): LiveData<List<Diary>> = diaryDao.getDiarys()
+    fun getDiary(id: UUID): LiveData<Diary?> = diaryDao.getDiary(id)
+    fun updateDiary(diary: Diary) {
+        executor.execute {
+            diaryDao.updateDiary(diary)
+        }
+    }
+    fun insertDiary(diary: Diary) {
+        executor.execute {
+            diaryDao.insertDiary(diary)
+        }
+    }
+    fun deleteDiary(diary: Diary) {
+        executor.execute {
+            diaryDao.deleteDiary(diary.isDelete, diary.id)
+        }
+    }
 
-    fun getConfig(): List<Config> = configDao.getConfig()
-    fun updateConfig(config: Config) = configDao.updateConfig(config)
-    fun insertConfig(config: Config) = configDao.insertConfig(config)
+    fun getMoons(): LiveData<List<Moon>> = moonDao.getMoons()
+    fun getMoon(id: UUID): LiveData<Moon?> = moonDao.getMoon(id)
+    fun updateMoon(moon: Moon) {
+        executor.execute {
+            moonDao.updateMoon(moon)
+        }
+    }
+    fun deleteMoon(moon: Moon) {
+        executor.execute {
+            moonDao.deleteMoon(moon.isDelete, moon.id)
+        }
+    }
+    fun insertMoon(moon: Moon) {
+        executor.execute {
+            moonDao.insertMoon(moon)
+        }
+    }
+
+    fun getConfig(): LiveData<List<Config>> = configDao.getConfig()
+    fun updateConfig(config: Config) {
+        executor.execute {
+            configDao.updateConfig(config)
+        }
+    }
+    fun insertConfig(config: Config) {
+        executor.execute {
+            configDao.insertConfig(config)
+        }
+    }
 
 
     companion object {
