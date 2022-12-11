@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="emoji">
+        <item>@mipmap/img_kx</item>
+        <item>@mipmap/img_pj</item>
+        <item>@mipmap/img_sq</item>
+        <item>@mipmap/img_dx</item>
+        <item>@mipmap/img_henbang</item>
+        <item>@mipmap/img_leile</item>
+        <item>@mipmap/img_sx</item>
+        <item>@mipmap/img_youxian</item>
+        <item>@mipmap/img_mimang</item>
+        <item>@mipmap/img_wy</item>
+        <item>@mipmap/img_xd</item>
+    </array>
+    <array name="emoji_sd">
+        <item>@mipmap/img_kx_sd</item>
+        <item>@mipmap/img_pj_sd</item>
+        <item>@mipmap/img_sq_sd</item>
+        <item>@mipmap/img_dx_sd</item>
+        <item>@mipmap/img_henbang_sd</item>
+        <item>@mipmap/img_leile_sd</item>
+        <item>@mipmap/img_sx_sd</item>
+        <item>@mipmap/img_youxian_sd</item>
+        <item>@mipmap/img_mimang_sd</item>
+        <item>@mipmap/img_wy_sd</item>
+        <item>@mipmap/img_xd_sd</item>
+    </array>
+</resources>
