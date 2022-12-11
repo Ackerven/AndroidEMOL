@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">EMOL</string>
+    <string name="author">Ackerven</string>
+    <string name="slogan">在销声匿迹的日子里\n我也在偷偷地热爱着生活</string>
+    <string name="index_tip1">Hi，现在心情怎么样？</string>
+    <string name="index_tip2">Tips: 点击心情添加日记，长按图标查看心情</string>
 </resources>
